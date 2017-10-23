@@ -1,0 +1,41 @@
+automations old:
+  - alias: iOS app AN Game WIN
+    initial_state: true
+    hide_entity: true
+    trigger:
+      platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: WIN
+    action:
+      service: input_select.select_option
+      data:
+        entity_id: input_select.holiday_led_effect
+        option: Touchdown
+
+  - alias: iOS app AN Game LOSS
+    initial_state: true
+    hide_entity: true
+    trigger:
+      platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: LOSS
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.holiday_led_effect
+          option: Solid
+      - service: light.turn_off
+        entity_id: light.holiday_lights
+ios:
+  push:
+    categories:       
+      - name: EndGameLEDs
+        identifier: 'GAME'
+        actions:
+          - identifier: 'WIN'
+            title: 'They Won!'
+          - identifier: 'LOSS'
+            title: 'Not this time...'
+       
