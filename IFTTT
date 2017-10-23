@@ -1,0 +1,13 @@
+IFTTT:
+
+##Turn the light on at game start:
+URL = http://YOURADDRESS.duckdns.org:8123/api/services/input_select/select_option?api_password=YOURPW
+Method = Post
+Content Type = application/json
+Body ={"entity_id":"input_select.YOURLEDSNAME","option":"YOUREFFECT"}
+
+##Get Actionable Notification at the end of the game:
+URL = http://YOURADDRESS.duckdns.org:8123/api/service/notify/ios_YOURDeviceID?api_password=YOURPW
+Method = Post
+Content Type = application/json
+Body = { "message":"Did your team win?", "title":"Hey there sports fan!", "data": { "push": { "category":"GAME" } } }
